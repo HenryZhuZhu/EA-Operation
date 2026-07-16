@@ -1,0 +1,1 @@
+import{d as o,c as a,a as n,Q as r,m,s as c,o as t}from"./index-D3DkYCq-.js";const d={class:"section-label"},i={key:0},p=o({__name:"SectionLabel",props:{small:{}},setup(e){return(l,s)=>(t(),a("div",d,[s[0]||(s[0]=n("span",{class:"b",style:{background:"var(--muted)"}},null,-1)),r(l.$slots,"default"),e.small?(t(),a("small",i,m(e.small),1)):c("",!0)]))}});export{p as _};
