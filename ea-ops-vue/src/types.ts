@@ -79,3 +79,20 @@ export interface WorkStat {
   total: number
   avgHours: number
 }
+
+/** 年度增长复盘：单个指标的逐月序列 */
+export interface GrowthMetric {
+  key: string
+  label: string
+  unit: string
+  /** 与 Growth.months 等长的逐月值（旧→新，末点=当前） */
+  series: number[]
+  /** 该指标「越低越好」（如结案周期）；缺省为越高越好 */
+  betterWhenLower?: boolean
+}
+
+/** 年度增长复盘数据集 */
+export interface Growth {
+  months: string[]
+  metrics: GrowthMetric[]
+}

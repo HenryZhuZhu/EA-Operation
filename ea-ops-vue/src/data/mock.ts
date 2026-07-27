@@ -3,7 +3,7 @@
 //  上线时把这里的「示例数据」换成 umami / EA 后端返回的真实数据即可，
 //  视图与计算逻辑无需改动。字段含义见 ../types.ts 与 交接文档。
 // ===================================================================
-import type { OverviewBucket, RiskCluster, Tele } from '@/types'
+import type { Growth, OverviewBucket, RiskCluster, Tele } from '@/types'
 
 /** 演示用「今天」；接入真实数据后可用 new Date() */
 export const TODAY = '2026-07-16'
@@ -75,3 +75,21 @@ export const riskClusters: RiskCluster[] = [
 export const VAL = { hourlyRate: 120, aiMinPerUse: 8, hoursPerCase: 3, autoCasePerMonth: 18, autoCaseMin: 4 }
 export const KNOW = { cases: 128, nodes: 1840, paths: 96, deadEnds: 520 } // 思维导图沉淀量 ← EA 后端
 export const DV = { reuseRate: 0.4, hoursPerReuse: 4, avoidRate: 0.2, hoursPerDeadEnd: 1.5 }
+
+// ===== 增长复盘：关键指标逐月序列（示例；上线由 umami 按周期聚合 / EA 后端覆盖）=====
+//  months 与每个 series 等长，末点=当前。用于「增长复盘」页在日/周/月/季度/自定义维度下看各指标趋势。
+export const growth: Growth = {
+  months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+  metrics: [
+    { key: 'active', label: '活跃用户', unit: '', series: [46, 58, 71, 85, 102, 124, 142] },
+    { key: 'newUsers', label: '新增用户', unit: '', series: [8, 10, 9, 12, 14, 20, 24] },
+    { key: 'teams', label: '覆盖团队', unit: '', series: [3, 4, 5, 6, 7, 7, 8] },
+    { key: 'aiAdopt', label: 'AI 采纳', unit: ' 次', series: [12, 18, 25, 33, 42, 52, 61] },
+    { key: 'retentionD7', label: '7日留存', unit: '%', series: [28, 31, 34, 37, 40, 43, 45] },
+    { key: 'closeRate', label: '结案转化率', unit: '%', series: [14, 17, 19, 22, 25, 27, 29] },
+    { key: 'guideDone', label: '引导完成率', unit: '%', series: [58, 63, 68, 72, 76, 79, 81] },
+    { key: 'cycle', label: '平均结案周期', unit: ' 天', series: [16.8, 16.1, 15.2, 14.4, 13.6, 13.0, 12.6], betterWhenLower: true },
+    { key: 'noResult', label: '搜索无结果率', unit: '%', series: [21, 18, 16, 14, 12, 10, 9], betterWhenLower: true },
+    { key: 'valueH', label: '累计节省工时', unit: ' h', series: [180, 520, 1040, 1760, 2680, 3820, 5180] },
+  ],
+}

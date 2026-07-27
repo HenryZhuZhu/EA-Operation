@@ -9,6 +9,7 @@ const routes = [
   { path: '/risk', name: 'risk', component: () => import('@/pages/RiskPage.vue') },
   { path: '/risk/:index', name: 'risk-detail', meta: { nav: 'risk' }, component: () => import('@/pages/RiskDetailPage.vue') },
   { path: '/value', name: 'value', component: () => import('@/pages/ValuePage.vue') },
+  { path: '/growth', name: 'growth', component: () => import('@/pages/GrowthPage.vue') },
 ]
 
 export const router = createRouter({

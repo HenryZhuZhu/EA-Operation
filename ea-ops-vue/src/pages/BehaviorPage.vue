@@ -30,7 +30,7 @@ const kpis = computed(() => {
     ['申请结案', Math.round(F[3][1] * f), '', '本区间结案', 4],
     ['平均结案周期', 12.6, ' 天', '结案用时均值', -2],
   ]
-  return arr.map(kpiView)
+  return arr.map((k) => kpiView(k, st))
 })
 
 const miniCards = computed(() => {
@@ -60,7 +60,7 @@ const miniCards = computed(() => {
 
     <SectionLabel>核心行为指标</SectionLabel>
     <div class="kpis">
-      <KpiCard v-for="k in kpis" :key="k.label" :label="k.label" :value="k.value" :calc="k.calc" />
+      <KpiCard v-for="k in kpis" :key="k.label" :label="k.label" :value="k.value" :calc="k.calc" :series="k.series" :trend="k.trend" :labels="k.labels" :unit="k.unit" />
     </div>
 
     <div class="panel funnel-panel" style="min-height:320px;margin:18px 0 16px">

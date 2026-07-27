@@ -7,6 +7,7 @@ import HoursChart from '@/components/HoursChart.vue'
 import SectionLabel from '@/components/SectionLabel.vue'
 import { tele } from '@/data/mock'
 import { userStatus, daysAgo, sumLogins } from '@/data/compute'
+import { HYPERDX, replayForUser } from '@/data/hyperdx'
 
 const route = useRoute()
 const router = useRouter()
@@ -59,6 +60,12 @@ function back() {
   if (window.history.length > 1) router.back()
   else router.push('/usage')
 }
+
+/** 是否展示会话回放入口：已配置 HyperDX 且该用户有登录记录 */
+const showReplay = computed(() => HYPERDX.enabled && !!user.value?.lastLogin)
+function openReplay() {
+  if (user.value) window.open(replayForUser(user.value.name), '_blank', 'noopener')
+}
 </script>
 
 <template>
@@ -72,6 +79,7 @@ function back() {
           <template v-if="user.lastLogin">　·　最近登录 {{ user.lastLogin }}</template>
         </p>
       </div>
+      <button v-if="showReplay" class="btn replay-btn" @click="openReplay" title="在 HyperDX 中回放该用户的操作会话">▷ 查看会话回放</button>
     </div>
 
     <template v-if="!user || !user.lastLogin">

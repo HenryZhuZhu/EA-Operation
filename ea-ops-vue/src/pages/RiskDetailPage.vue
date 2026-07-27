@@ -5,11 +5,18 @@ import KpiCard from '@/components/KpiCard.vue'
 import Panel from '@/components/Panel.vue'
 import SectionLabel from '@/components/SectionLabel.vue'
 import { riskClusters } from '@/data/mock'
+import { HYPERDX, replayForItems } from '@/data/hyperdx'
 
 const route = useRoute()
 const router = useRouter()
 const sevL: Record<string, string> = { high: '高危', mid: '关注', low: '低' }
 const c = computed(() => riskClusters[Number(route.params.index)])
+
+/** 已配置 HyperDX 且该根因有关联 Case 时，展示会话回放入口 */
+const showReplay = computed(() => HYPERDX.enabled && c.value?.items?.length > 0)
+function openReplay() {
+  if (c.value) window.open(replayForItems(c.value.items), '_blank', 'noopener')
+}
 
 const kpis = computed(() => {
   const x = c.value
@@ -32,6 +39,7 @@ const kpis = computed(() => {
           <span class="risk-sev" :class="c.sev" style="padding:3px 10px">{{ sevL[c.sev] }}</span>　{{ c.trend }}
         </p>
       </div>
+      <button v-if="showReplay" class="btn replay-btn" @click="openReplay" title="回放与本根因关联 Case 相关的操作会话">▷ 相关会话回放</button>
     </div>
 
     <div class="kpis" style="grid-template-columns:repeat(4,1fr)">

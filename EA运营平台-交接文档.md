@@ -56,17 +56,18 @@ npm run preview   # 预览生产包
 
 ## 2. 页面与模块总览
 
-顶部导航 5 个主页面 + 2 个下钻子页，全部已实现：
+顶部导航 6 个主页面 + 2 个下钻子页，全部已实现：
 
 | 页面 | DOM id | 渲染函数 | 数据来源 | 上线接入状态 |
 |---|---|---|---|---|
 | 运营总览 | `#overview` | `renderOverview()` | `ovData` + `tele.features/hoursBase` | ✅ 已内置 umami 适配（`umOverview`/`loadLive`） |
 | 核心行为 | `#behavior` | `renderBehavior()` | `tele.funnel` | ⛳ 复用 `umOverview` 返回的 funnel |
 | 使用分析 | `#usage` | `renderUsers/renderTeams/renderUserRows/renderLeaderboard` | `tele.users` | 🔧 待接 distinctId / sessions，见 §5 |
-| └ 用户详情（子页） | `#userdetail` | `openUserDetail()` | `tele.users` + `tele.features/hoursBase` | 🔧 随 §5 |
+| └ 用户详情（子页） | `#userdetail` | `openUserDetail()` | `tele.users` + `tele.features/hoursBase` | 🔧 随 §5；含会话回放入口（§10.2） |
 | 风险预警 | `#risk` | `renderRisk()` / `openRiskDetail()` | `riskClusters` | 🔧 接 EA 后端 AI 归因，见 §6 |
-| └ 风险详情（子页） | `#riskdetail` | `openRiskDetail()` | `riskClusters` | 🔧 随 §6 |
+| └ 风险详情（子页） | `#riskdetail` | `openRiskDetail()` | `riskClusters` | 🔧 随 §6；含会话回放入口（§10.2） |
 | 价值与收益 | `#value` | `renderValue()` | `VAL/KNOW/DV` + `tele` | 🔧 填口径常量 + 后端沉淀量，见 §6 |
+| 增长复盘 | `#growth` | `GrowthPage.vue` | `growth`（逐月序列） | 🔧 接 umami 按周期聚合，见 §10.4 |
 
 图例：✅ 开箱即用 · ⛳ 同一接口顺带拿到 · 🔧 需实现对应适配。
 
@@ -216,6 +217,7 @@ type RiskCluster = {
 - [ ] 后端提供：`riskClusters`（AI 归因）+ `KNOW`（沉淀量）
 - [ ] 与业务/财务对齐 `VAL/DV` 价值口径
 - [ ] 全平台中文文案、PC 端（不做移动端），保持既有视觉
+- [ ] （如启用会话回放）EA 主产品接入 `@hyperdx/browser`，`hyperdx.ts` 填内网 `baseUrl` 且 `enabled:true`
 
 ---
 
@@ -226,3 +228,61 @@ type RiskCluster = {
 - **降级策略**：`loadLive()` 已 try/catch，拉数失败自动回退演示数据并 `console.warn`，不白屏。
 - **数字口径可审计**：每张卡底部 `code` 标注计算口径，价值模块列出全部假设，便于对外解释。
 - **示例 vs 真实**：当前所有数字均为**示例埋点/占位**，非真实业务数据；接入前请勿对外引用具体数值。
+
+---
+
+## 10. 新增能力：数据趋势 sparkline & HyperDX 会话回放
+
+### 10.1 KPI 卡片迷你趋势线（sparkline，可交互）
+
+每张 KPI 卡在数值下方多了一条**迷你趋势线**，颜色随涨跌（升绿 / 降红 / 平灰）；**鼠标悬停任意点** 显示该点的时间标签 + 数值（高亮圆点 + 竖向引导线）。
+
+| 文件 | 作用 |
+|---|---|
+| [ea-ops-vue/src/components/Sparkline.vue](ea-ops-vue/src/components/Sparkline.vue) | SVG 折线 + 渐隐面积 + hover tooltip，`props: series/trend/labels/unit` |
+| [ea-ops-vue/src/data/compute.ts](ea-ops-vue/src/data/compute.ts) | `sparkSeries()` 由「当前值 + 同比%」确定性推导序列；`sparkDates()` 按周期生成日期标签；`kpiView(k, st)` 输出 `series/labels/unit/trend` |
+| [ea-ops-vue/src/components/KpiCard.vue](ea-ops-vue/src/components/KpiCard.vue) | 传入 `series` 即渲染，否则不显示（手工卡片零改动） |
+
+> **接真实趋势**：`sparkSeries/sparkDates` 只是「无真实序列时」的确定性占位。接入 umami 后，把按天/周的真实序列与日期（`GET /pageviews?unit=day` 等）填给 `kpiView` 的 `series`/`labels` 即可，视图无需改。生效页面：运营总览、核心行为。
+
+### 10.2 HyperDX 会话回放入口（下钻，只读）
+
+运营平台**不录制**会话——录制由 EA 主产品接入 `@hyperdx/browser`（rrweb）完成；平台只提供「按工号 / 关联 Case 跳进自建 HyperDX 回放界面」的入口。
+
+| 文件 | 作用 |
+|---|---|
+| [ea-ops-vue/src/data/hyperdx.ts](ea-ops-vue/src/data/hyperdx.ts) | `HYPERDX = { baseUrl, enabled, userIdKey }` 配置 + `replayForUser()` / `replayForItems()` 深链构造（风格对齐 `umami.ts`） |
+| [ea-ops-vue/src/pages/UserDetailPage.vue](ea-ops-vue/src/pages/UserDetailPage.vue) | 用户详情页「▷ 查看会话回放」——按工号深链 |
+| [ea-ops-vue/src/pages/RiskDetailPage.vue](ea-ops-vue/src/pages/RiskDetailPage.vue) | 风险详情页「▷ 相关会话回放」——按关联 Case/Issue 深链 |
+
+**启用三步：**
+1. 自建 HyperDX（docker-compose），记下 UI 基址与 OTel Collector 地址。
+2. EA 主产品接入 `@hyperdx/browser`：`HyperDX.init({apiKey,service,url:Collector地址,maskAllInputs:true})`，并 `setGlobalAttributes({userId:工号,...})`——`userId` 须与 `hyperdx.ts` 的 `userIdKey` 一致。
+3. `hyperdx.ts` 填内网 `baseUrl`、`enabled:true`，入口按钮即出现。
+
+> **隐私**：EA Case 含敏感信息，录制侧务必开 `maskAllInputs`，敏感区域加 `.hdx-block`/`data-hdx-privacy="mask"`；建议开采样、设短保留期以控 ClickHouse 存储成本。深链查询字段（`userId`/`caseId`）如与实际埋点不同，改 `hyperdx.ts` 即可。
+
+> 效果示例见 [EA运营平台-趋势与回放-示例.html](EA运营平台-趋势与回放-示例.html)（可直接双击打开）。
+
+### 10.3 手动刷新 & 最后数据更新时间
+
+顶部导航右侧新增「更新于 HH:MM:SS」+ 刷新按钮（╨ 图标，刷新中旋转并禁用防重复点击）。
+
+| 文件 | 作用 |
+|---|---|
+| [ea-ops-vue/src/data/umami.ts](ea-ops-vue/src/data/umami.ts) | `lastUpdated` / `refreshing` 状态 + `refresh()`：live 模式走 `loadLive()` 拉真实数据，mock 模式触发重渲染；完成后更新时间戳并 `liveTick++` |
+| [ea-ops-vue/src/components/TopNav.vue](ea-ops-vue/src/components/TopNav.vue) | 更新时间展示 + 刷新按钮 |
+
+> 接入后：`refresh()` 已自动调 `loadLive(periodState.overview)`；`lastUpdated` 可改成取后端返回的数据时间而非本地点击时间。
+
+### 10.4 增长复盘页（年终述职 / 业绩证明）
+
+新增导航页「增长复盘」（[GrowthPage.vue](ea-ops-vue/src/pages/GrowthPage.vue)）：选**时间维度（日 / 周 / 月 / 季度 / 自定义）**，看各项指标的趋势（每指标一张趋势卡），**悬停折线看具体某天/某点的值**；底部自动生成可直接念的汇报要点。
+
+| 文件 | 作用 |
+|---|---|
+| [ea-ops-vue/src/data/mock.ts](ea-ops-vue/src/data/mock.ts) | `growth = { months, metrics[] }`：各指标逐月基准序列（示例）。`GrowthMetric.betterWhenLower` 标记「越低越好」指标（结案周期 / 搜索无结果率） |
+| [ea-ops-vue/src/data/compute.ts](ea-ops-vue/src/data/compute.ts) | `growthView(period, from, to)` 按时间维度重采样（日=近期逐日投影，周/月/季度/自定义=分桶）；`growthStat()` 算起止/增幅/净增 |
+| [ea-ops-vue/src/components/Sparkline.vue](ea-ops-vue/src/components/Sparkline.vue) | 复用为每张趋势卡的可交互折线 |
+
+> **接入**：把 `growthView` 换成后端按时间维度聚合的真实序列即可，页面零改动。“越低越好”指标在任何维度下都能正确判为「向好」绿色。

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EA 运营平台 · 增长复盘 & 会话回放 · 效果示例</title>
+<style>
+  :root{
+    --bg:#000;--surface:#1d1d1f;--surface-2:#161617;--text:#f5f5f7;--muted:#86868b;
+    --border:rgba(255,255,255,.10);--border-strong:rgba(255,255,255,.16);
+    --accent:#2997ff;--up:#30d158;--down:#ff453a;
+    --card-grad:linear-gradient(160deg,#202022,#171718);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);--shadow-md:0 4px 24px rgba(0,0,0,.3);--shadow-lg:0 20px 60px rgba(0,0,0,.5);
+    --card-hi:inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  .topbar{position:sticky;top:0;z-index:20;height:56px;display:flex;align-items:center;gap:18px;
+    padding:0 30px;background:rgba(0,0,0,.72);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:14px}
+  .logo{width:26px;height:26px;border-radius:7px;background:var(--text);color:var(--bg);display:grid;place-items:center;font-size:12px;font-weight:700}
+  .fresh{margin-left:auto;display:flex;align-items:center;gap:9px}
+  .upd{font-size:11.5px;color:var(--muted);white-space:nowrap}
+  .refresh-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.16s}
+  .refresh-btn:hover{color:var(--text);border-color:var(--border-strong);background:var(--surface-2)}
+  .refresh-btn.spin svg{animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:34px 30px 80px}
+  .topline{font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:600}
+  h1{font-size:32px;font-weight:600;letter-spacing:-.03em;margin:9px 0 6px}
+  .sub{font-size:14px;color:var(--muted);max-width:72ch;line-height:1.6}
+
+  .head{display:flex;align-items:flex-start;margin-top:24px}
+  .head-actions{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--border);border-radius:980px;padding:3px}
+  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:12.5px;font-weight:500;padding:5px 14px;border-radius:980px;cursor:pointer;transition:.15s}
+  .seg button.on{background:var(--text);color:var(--bg);font-weight:600}
+  .seclabel{font-size:12px;font-weight:600;color:var(--muted);margin:14px 0 14px;display:flex;align-items:center;gap:10px}
+  .seclabel::before{content:"";width:3px;height:13px;border-radius:2px;background:var(--accent)}
+  .seclabel small{font-weight:500;opacity:.7}
+
+  .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .mtile{background:var(--card-grad);border:1px solid var(--border);border-radius:16px;padding:15px 16px 13px;box-shadow:var(--shadow-sm),var(--card-hi);transition:transform .28s cubic-bezier(.22,1,.36,1),border-color .28s,box-shadow .28s}
+  .mtile:hover{transform:translateY(-2px);border-color:var(--border-strong);box-shadow:var(--shadow-lg),var(--card-hi)}
+  .mt-top{display:flex;align-items:center;gap:8px}
+  .mt-label{font-size:12px;color:var(--muted)}
+  .mt-delta{margin-left:auto;font-size:11px;font-weight:600}
+  .mt-delta.up{color:var(--up)}.mt-delta.down{color:var(--down)}
+  .mt-val{font-size:23px;font-weight:600;letter-spacing:-.03em;margin-top:3px}
+  .mt-val small{font-size:11px;font-weight:500;color:var(--muted)}
+  .mt-foot{font-size:9.5px;color:var(--muted);margin-top:9px;border-top:1px solid var(--border);padding-top:7px}
+
+  .spark-wrap{position:relative;cursor:crosshair;margin-top:9px}
+  .spark{display:block;width:100%;height:44px;overflow:visible}
+  .spark-line{fill:none;stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+  .spark-guide{stroke:var(--border-strong);stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:2 2}
+  .spark-dot-el,.spark-hot-el{position:absolute;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+  .spark-dot-el{width:4px;height:4px}
+  .spark-hot-el{width:7px;height:7px;box-shadow:0 0 0 2px var(--surface)}
+  .up .spark-line{stroke:var(--up)}.up .spark-area{fill:var(--up)}.up .spark-dot-el,.up .spark-hot-el{background:var(--up)}
+  .down .spark-line{stroke:var(--down)}.down .spark-area{fill:var(--down)}.down .spark-dot-el,.down .spark-hot-el{background:var(--down)}
+  .spark-area{opacity:.13}
+  .spark-tip{position:absolute;bottom:calc(100% - 1px);transform:translateX(-50%);z-index:4;background:var(--surface);border:1px solid var(--border-strong);border-radius:7px;padding:3px 7px;font-size:10px;line-height:1.25;white-space:nowrap;pointer-events:none;box-shadow:var(--shadow-md);display:flex;gap:5px;align-items:baseline}
+  .spark-tip b{font-weight:600}.spark-tip span{color:var(--muted)}
+  .spark-tip.hide{display:none}
+
+  .panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+  .panel{background:var(--card-grad);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm),var(--card-hi)}
+  .panel h3{font-size:15px;font-weight:600;margin:0 0 12px}
+  .panel .st{margin-left:auto}
+  .ph{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .meta{font-size:12.5px;color:var(--muted);margin:2px 0 14px}
+  .talk{list-style:none;margin:0;padding:0}
+  .talk li{font-size:12.5px;color:var(--muted);line-height:1.7;padding-left:15px;position:relative;margin-bottom:5px}
+  .talk li::before{content:"›";position:absolute;left:0;color:var(--accent)}
+  .talk b{color:var(--text);font-weight:600}
+  .btn{height:36px;border-radius:980px;padding:0 16px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font:inherit;font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.16s}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .st{font-size:11px;padding:2px 9px;border-radius:980px;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border-strong)}
+  .st i{width:6px;height:6px;border-radius:50%;background:var(--up)}
+  .risk-sev{font-size:11px;padding:3px 10px;border-radius:980px;font-weight:600;color:var(--down);background:color-mix(in srgb,var(--down) 16%,transparent)}
+  .rowbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+  .note{margin-top:30px;font-size:11.5px;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);padding-top:16px}
+  .note b{color:var(--text);font-weight:600}
+  .toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;padding:12px 18px;font-size:12.5px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast code{color:var(--accent);font-family:ui-monospace,Menlo,monospace}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="logo">EA</div>EA 运营平台</div>
+  <div class="fresh">
+    <span class="upd" id="upd">更新于 —</span>
+    <button class="refresh-btn" id="refreshBtn" title="刷新数据">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12a9 9 0 1 1-2.64-6.36" /><polyline points="21 3 21 8 16 8" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="topline">EA 运营平台 · 效果示例</div>
+  <h1>增长复盘 & 会话回放</h1>
+  <p class="sub">选时间维度（日 / 周 / 月 / 季度），看各项指标的趋势；鼠标悬停任意折线即可看到具体某天 / 某点的值。折线颜色随涨跌，圆点为 HTML 元素绘制、任何拉伸下都是正圆。</p>
+
+  <div class="head">
+    <div class="seclabel" style="margin:0">各指标趋势 <small id="rangeNote">·</small></div>
+    <div class="head-actions">
+      <div class="seg" id="seg"></div>
+    </div>
+  </div>
+
+  <div class="mini-grid" id="grid" style="margin-top:14px"></div>
+
+  <div class="panels">
+    <div class="panel">
+      <h3>汇报要点 · 可直接念给老板</h3>
+      <ul class="talk" id="talk"></ul>
+    </div>
+    <div class="panel">
+      <h3>下钻 · 会话回放（HyperDX）</h3>
+      <div class="meta">运营平台不录制会话，录制由 EA 主产品接入 <code>@hyperdx/browser</code> 完成；这里提供按工号 / 关联 Case 跳进自建 HyperDX 回放的入口。</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span class="st"><i></i>张伟 · PTE · 活跃</span>
+        <button class="btn" onclick="demoReplay('replayForUser','userId:&quot;张伟&quot;')">▷ 查看会话回放</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="risk-sev">高危 · Timing margin 不足</span>
+        <button class="btn" onclick="demoReplay('replayForItems','caseId:&quot;ISS-20260415&quot; OR caseId:&quot;EA-260511000001&quot;')">▷ 相关会话回放</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>说明：</b>本文件为静态效果示例，数值均为占位。趋势由逐月基准序列按所选时间维度重采样（日维度用近期增速逐日投影；接入 umami 后替换为真实按周期序列）；会话回放按钮真实环境会打开自建 HyperDX 的 <code>/sessions?q=…</code> 深链，此处仅弹提示演示。对应工程实现见 <b>ea-ops-vue/src/pages/GrowthPage.vue</b>、<b>src/components/Sparkline.vue</b>、<b>src/data/compute.ts</b>、<b>src/data/hyperdx.ts</b>。
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TODAY = '2026-07-16';
+const DAY = 864e5, MONTH_MS = 2629800000;
+const YEAR_START = +new Date(2026, 0, 1);
+
+// 逐月基准（与工程 mock.ts 的 growth 一致）
+const growth = {
+  months: ['1月','2月','3月','4月','5月','6月','7月'],
+  metrics: [
+    { key:'active', label:'活跃用户', unit:'', series:[46,58,71,85,102,124,142] },
+    { key:'newUsers', label:'新增用户', unit:'', series:[8,10,9,12,14,20,24] },
+    { key:'teams', label:'覆盖团队', unit:'', series:[3,4,5,6,7,7,8] },
+    { key:'aiAdopt', label:'AI 采纳', unit:' 次', series:[12,18,25,33,42,52,61] },
+    { key:'retentionD7', label:'7日留存', unit:'%', series:[28,31,34,37,40,43,45] },
+    { key:'closeRate', label:'结案转化率', unit:'%', series:[14,17,19,22,25,27,29] },
+    { key:'guideDone', label:'引导完成率', unit:'%', series:[58,63,68,72,76,79,81] },
+    { key:'cycle', label:'平均结案周期', unit:' 天', series:[16.8,16.1,15.2,14.4,13.6,13.0,12.6], betterWhenLower:true },
+    { key:'noResult', label:'搜索无结果率', unit:'%', series:[21,18,16,14,12,10,9], betterWhenLower:true },
+    { key:'valueH', label:'累计节省工时', unit:' h', series:[180,520,1040,1760,2680,3820,5180] },
+  ],
+};
+
+const monthIdxOf = (d, maxIdx) => Math.max(0, Math.min(maxIdx, (d - YEAR_START) / MONTH_MS));
+const sampleAt = (s, idx) => { const i0 = Math.floor(idx), i1 = Math.min(s.length-1, i0+1); return s[i0] + (s[i1]-s[i0])*(idx-i0); };
+const md = d => `${d.getMonth()+1}-${d.getDate()}`;
+
+function projectDaily(m, n){
+  const s = m.series, end = s[s.length-1], prev = s[s.length-2] ?? end;
+  const dG = (prev ? (end-prev)/prev : 0)/30, isInt = s.every(Number.isInteger);
+  const seed = m.key.split('').reduce((a,c)=>a+c.charCodeAt(0),0), amp = Math.abs(end)*0.008;
+  const out = [];
+  for(let k=0;k<n;k++){ let v = end/Math.pow(1+dG, n-1-k); if(k!==n-1) v += Math.sin(k*0.8+seed)*amp; out.push(Math.max(0, isInt?Math.round(v):+v.toFixed(1))); }
+  out[n-1] = end; return out;
+}
+
+function growthView(period){
+  const maxIdx = growth.months.length-1;
+  let ticks;
+  if(period==='月') ticks = growth.months.map((m,i)=>({label:m, idx:i}));
+  else if(period==='日'){ const N=14, t=+new Date(TODAY); ticks = Array.from({length:N},(_,k)=>{const d=new Date(t-(N-1-k)*DAY);return{label:md(d), idx:monthIdxOf(+d,maxIdx)};}); }
+  else if(period==='季度'){ ticks = [{label:'Q1',idx:2},{label:'Q2',idx:5},{label:'Q3',idx:8},{label:'Q4',idx:11}].filter(q=>q.idx<=maxIdx); if(!ticks.length||ticks[ticks.length-1].idx<maxIdx) ticks.push({label:'本季',idx:maxIdx}); }
+  else { const N=12, t=+new Date(TODAY); ticks = Array.from({length:N},(_,k)=>{const d=new Date(t-(N-1-k)*7*DAY);return{label:md(d), idx:monthIdxOf(+d,maxIdx)};}); }
+  const metrics = growth.metrics.map(m=>{
+    const isInt = m.series.every(Number.isInteger);
+    const series = period==='日' ? projectDaily(m, ticks.length)
+      : ticks.map(tk=>{const v=sampleAt(m.series, tk.idx); return isInt?Math.round(v):+v.toFixed(1);});
+    return {...m, series};
+  });
+  return { labels: ticks.map(t=>t.label), metrics };
+}
+
+function growthStat(m){
+  const s=m.series, start=s[0], end=s[s.length-1];
+  const deltaPct = start ? Math.round(((end-start)/start)*100) : 0;
+  const improved = m.betterWhenLower ? end<start : end>start;
+  return { start, end, deltaPct, improved };
+}
+const fmtPct = d => (d>0?'+':'')+d+'%';
+
+// sparkline 几何（viewBox 120x44）
+const W=120, H=44, PAD=3;
+function geom(series){
+  const s = series.length>1?series:[0,0];
+  const min=Math.min(...s), max=Math.max(...s), span=(max-min)||1, step=(W-PAD*2)/(s.length-1);
+  const pts = s.map((v,i)=>[PAD+i*step, PAD+(1-(v-min)/span)*(H-PAD*2)]);
+  const line = pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const last=pts[pts.length-1], first=pts[0];
+  const area = `${line} L${last[0].toFixed(1)} ${H} L${first[0].toFixed(1)} ${H} Z`;
+  return { pts, line, area, last };
+}
+
+let period = '月';
+function render(){
+  const view = growthView(period);
+  document.getElementById('rangeNote').textContent = `· ${view.labels[0]}–${view.labels[view.labels.length-1]} · 悬停折线看具体值`;
+  const grid = document.getElementById('grid');
+  grid.innerHTML = view.metrics.map((m,mi)=>{
+    const st = growthStat(m), g = geom(m.series), dir = st.improved?'up':'down';
+    const endL = (g.last[0]/W*100).toFixed(2), endT = (g.last[1]/H*100).toFixed(2);
+    return `<div class="mtile ${dir}" data-i="${mi}">
+      <div class="mt-top"><span class="mt-label">${m.label}</span><span class="mt-delta ${dir}">${fmtPct(st.deltaPct)}</span></div>
+      <div class="mt-val">${st.end}<small>${m.unit}</small></div>
+      <div class="spark-wrap">
+        <svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+          <path class="spark-area" d="${g.area}"></path>
+          <path class="spark-line" d="${g.line}"></path>
+          <line class="spark-guide" style="display:none"></line>
+        </svg>
+        <span class="spark-dot-el" style="left:${endL}%;top:${endT}%"></span>
+        <span class="spark-hot-el" style="display:none"></span>
+        <div class="spark-tip hide"></div>
+      </div>
+      <div class="mt-foot">期初 ${st.start} → 当前 ${st.end}${m.unit}</div>
+    </div>`;
+  }).join('');
+  // 绑定 hover
+  grid.querySelectorAll('.mtile').forEach(tile=>{
+    const mi = +tile.dataset.i, m = view.metrics[mi], g = geom(m.series);
+    const wrap = tile.querySelector('.spark-wrap');
+    const guide = tile.querySelector('.spark-guide');
+    const hot = tile.querySelector('.spark-hot-el');
+    const tip = tile.querySelector('.spark-tip');
+    wrap.addEventListener('pointermove', e=>{
+      const rect = wrap.getBoundingClientRect();
+      const r = (e.clientX-rect.left)/rect.width, n = m.series.length;
+      const i = Math.min(n-1, Math.max(0, Math.round(r*(n-1))));
+      const p = g.pts[i];
+      guide.setAttribute('x1', p[0]); guide.setAttribute('x2', p[0]); guide.setAttribute('y1', 0); guide.setAttribute('y2', H); guide.style.display='';
+      hot.style.display=''; hot.style.left=(p[0]/W*100)+'%'; hot.style.top=(p[1]/H*100)+'%';
+      tip.classList.remove('hide'); tip.style.left = Math.min(88,Math.max(12,p[0]/W*100))+'%';
+      tip.innerHTML = `<b>${m.series[i]}${m.unit}</b><span>${view.labels[i]}</span>`;
+    });
+    wrap.addEventListener('pointerleave', ()=>{ guide.style.display='none'; hot.style.display='none'; tip.classList.add('hide'); });
+  });
+  // 汇报要点
+  const by = k => view.metrics.find(m=>m.key===k), S = m=>growthStat(m);
+  const act=S(by('active')), ai=S(by('aiAdopt')), cyc=S(by('cycle')), vh=S(by('valueH')), team=S(by('teams')), ret=S(by('retentionD7'));
+  document.getElementById('talk').innerHTML = [
+    `活跃用户从期初 <b>${act.start}</b> 增长到 <b>${act.end}</b>，<b>${fmtPct(act.deltaPct)}</b>，覆盖团队 ${team.start} → <b>${team.end}</b> 个。`,
+    `AI 采纳 ${ai.start} → <b>${ai.end}</b> 次（<b>${fmtPct(ai.deltaPct)}</b>），智能能力被真实采用。`,
+    `平均结案周期由 ${cyc.start} 天缩短至 <b>${cyc.end} 天</b>（快 <b>${Math.abs(cyc.deltaPct)}%</b>），交付更快。`,
+    `7 日留存 ${ret.start}% → <b>${ret.end}%</b>，用户留得住。`,
+    `累计为团队节省约 <b>${vh.end} 工时</b>，随沉淀持续放大。`,
+  ].map(t=>`<li>${t}</li>`).join('');
+}
+
+// 周期切换
+const segEl = document.getElementById('seg');
+['日','周','月','季度'].forEach(p=>{
+  const b = document.createElement('button');
+  b.textContent = p; b.className = p===period?'on':'';
+  b.onclick = ()=>{ period=p; segEl.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x.textContent===p)); render(); };
+  segEl.appendChild(b);
+});
+
+// 更新时间 + 刷新
+function setUpd(){ const d=new Date(), p=n=>String(n).padStart(2,'0'); document.getElementById('upd').textContent = `更新于 ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`; }
+const rb = document.getElementById('refreshBtn');
+rb.onclick = ()=>{ if(rb.classList.contains('spin')) return; rb.classList.add('spin'); setTimeout(()=>{ rb.classList.remove('spin'); setUpd(); render(); }, 500); };
+
+// 会话回放深链演示
+let toastTimer;
+function demoReplay(fn, q){
+  const url = `https://hyperdx.example.internal/sessions?q=${encodeURIComponent(q)}`;
+  const t = document.getElementById('toast');
+  t.innerHTML = `真实环境将打开 · <code>${fn}()</code><br>→ <code>${url}</code>`;
+  t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 4200);
+}
+
+setUpd(); render();
+</script>
+</body>
+</html>

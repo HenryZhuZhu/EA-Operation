@@ -13,8 +13,8 @@ import { liveTick } from '@/data/umami'
 
 const st = periodState.overview
 
-const access = computed(() => (liveTick.value, ovDataFor(st).access.map(kpiView)))
-const engage = computed(() => (liveTick.value, ovDataFor(st).engage.map(kpiView)))
+const access = computed(() => (liveTick.value, ovDataFor(st).access.map((k) => kpiView(k, st))))
+const engage = computed(() => (liveTick.value, ovDataFor(st).engage.map((k) => kpiView(k, st))))
 const factor = computed(() => factorFor(st))
 const label = computed(() => labelFor(st))
 const features = computed(() => (liveTick.value, tele.features.map((f) => ({ label: f[0], value: Math.round(f[1] * factor.value) }))))
@@ -32,12 +32,12 @@ const features = computed(() => (liveTick.value, tele.features.map((f) => ({ lab
 
     <SectionLabel>访问与活跃</SectionLabel>
     <div class="kpis">
-      <KpiCard v-for="k in access" :key="k.label" :label="k.label" :value="k.value" :calc="k.calc" />
+      <KpiCard v-for="k in access" :key="k.label" :label="k.label" :value="k.value" :calc="k.calc" :series="k.series" :trend="k.trend" :labels="k.labels" :unit="k.unit" />
     </div>
 
     <SectionLabel style="margin-top:22px">参与与转化</SectionLabel>
     <div class="kpis">
-      <KpiCard v-for="k in engage" :key="k.label" :label="k.label" :value="k.value" :calc="k.calc" />
+      <KpiCard v-for="k in engage" :key="k.label" :label="k.label" :value="k.value" :calc="k.calc" :series="k.series" :trend="k.trend" :labels="k.labels" :unit="k.unit" />
     </div>
 
     <SectionLabel style="margin-top:24px">使用洞察</SectionLabel>

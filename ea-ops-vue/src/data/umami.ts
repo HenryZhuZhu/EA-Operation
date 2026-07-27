@@ -8,6 +8,7 @@ import { ref } from 'vue'
 import type { FeatureUse, FunnelStep, KpiTuple, PeriodState } from '@/types'
 import { tele, ovData } from './mock'
 import { pct } from './compute'
+import { periodState } from '@/stores/period'
 
 export const UMAMI = {
   baseUrl: 'https://umami.你的域名',
@@ -18,6 +19,11 @@ export const UMAMI = {
 
 /** 接入后数据刷新信号：loadLive 覆盖 mock 后自增，页面 computed 读取它即可响应式更新 */
 export const liveTick = ref(0)
+
+/** 最近一次数据更新时间戳（顶部「更新于」展示 + 手动刷新更新） */
+export const lastUpdated = ref(Date.now())
+/** 手动刷新进行中标志（顶部按钮转圈用） */
+export const refreshing = ref(false)
 
 interface UmamiStats {
   visitors: number; pageviews: number; visits: number; bounces: number; totaltime: number
@@ -84,5 +90,25 @@ export async function loadLive(overviewState: PeriodState) {
     liveTick.value++ // 通知页面响应式重渲染
   } catch (e) {
     console.warn('[umami] 拉取失败，回退演示数据：', e)
+  }
+}
+
+/**
+ * 手动刷新：重新拉取数据并更新「最后更新时间」。
+ * live 模式走 loadLive 拉真实数据；mock 模式仅触发重渲染（演示动效）。
+ * 顶部刷新按钮调用它；至少转圈 ~400ms 给用户明确反馈。
+ */
+export async function refresh() {
+  if (refreshing.value) return
+  refreshing.value = true
+  try {
+    await Promise.all([
+      loadLive(periodState.overview),
+      new Promise((r) => setTimeout(r, 400)),
+    ])
+    liveTick.value++ // mock 模式也刷新（派生值/滚动动效）
+    lastUpdated.value = Date.now()
+  } finally {
+    refreshing.value = false
   }
 }
