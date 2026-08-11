@@ -98,10 +98,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display"
 .kpi .calc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--accent);font-size:9.5px}
 .kpi.tele .calc code{color:var(--tele)}
 .spark-wrap{height:38px;margin-top:9px;position:relative;cursor:crosshair}
-.spark{display:block;width:100%;height:34px;overflow:visible}.spark-line{fill:none;stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}.spark-area{opacity:.13}
-.spark-wrap.up .spark-line{stroke:var(--up)}.spark-wrap.up .spark-area{fill:var(--up)}.spark-wrap.down .spark-line{stroke:var(--down)}.spark-wrap.down .spark-area{fill:var(--down)}.spark-wrap.flat .spark-line{stroke:var(--muted)}.spark-wrap.flat .spark-area{fill:var(--muted)}
+.spark{display:block;width:100%;height:34px;overflow:visible}.spark-line{fill:none;stroke:var(--g-soft)!important;stroke-width:1.35;opacity:.82;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}.spark-area{opacity:1}
 .spark-dot-el,.spark-hot-el{position:absolute;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.spark-dot-el{width:4px;height:4px}.spark-hot-el{width:7px;height:7px;box-shadow:0 0 0 2px var(--surface)}
-.spark-wrap.up .spark-dot-el,.spark-wrap.up .spark-hot-el{background:var(--up)}.spark-wrap.down .spark-dot-el,.spark-wrap.down .spark-hot-el{background:var(--down)}.spark-wrap.flat .spark-dot-el,.spark-wrap.flat .spark-hot-el{background:var(--muted)}
+.spark-wrap.up .spark-dot-el,.spark-wrap.down .spark-dot-el,.spark-wrap.flat .spark-dot-el{background:var(--g-mid)}.spark-wrap.up .spark-hot-el,.spark-wrap.down .spark-hot-el,.spark-wrap.flat .spark-hot-el{background:var(--text)}
 .spark-tip{position:absolute;bottom:calc(100% - 1px);transform:translateX(-50%);z-index:4;background:var(--surface);border:1px solid var(--border-strong);border-radius:7px;padding:3px 7px;font-size:10px;line-height:1.2;white-space:nowrap;pointer-events:none;box-shadow:var(--shadow-md);display:none;gap:5px;align-items:baseline}.spark-tip b{font-weight:600}.spark-tip span{color:var(--muted)}.spark-wrap.hover .spark-tip{display:flex}
 .rating-summary{grid-template-columns:repeat(4,1fr)!important}.rating-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:14px}.rating-search{margin-left:auto;width:260px;height:34px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text);font:inherit;font-size:12px;padding:0 11px;outline:0}.rating-result{font-size:11px;color:var(--muted);white-space:nowrap}.rating-list{display:flex;flex-direction:column;gap:10px}.rating-card{background:var(--card-grad);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-sm),var(--card-hi);overflow:hidden}.rating-card-head{min-height:38px;padding:8px 14px;background:var(--surface-2);display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border)}.rating-state,.rating-level,.rating-urgency,.rating-source{font-size:9.5px;font-weight:600;border-radius:980px;padding:2px 8px;white-space:nowrap;border:1px solid var(--border)}.rating-state.rated{color:var(--up)}.rating-state.locked,.rating-state.excluded{color:var(--muted)}.rating-source.fail{color:var(--down)}.rating-code{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--muted)}.rating-updated{margin-left:auto;font-size:10px;color:var(--muted)}.rating-card-body{padding:14px;display:grid;grid-template-columns:minmax(300px,1fr) 126px 80px 90px 72px 92px;gap:14px;align-items:center}.rating-case-main{min-width:0}.rating-case-main h3{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rating-meta,.rating-relations{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:9.5px;color:var(--muted)}.rating-relations span{padding:2px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface-2);max-width:330px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rating-column-label,.rating-number span{display:block;font-size:9.5px;color:var(--muted);margin-bottom:5px}.rating-progress-line{height:5px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin-bottom:5px}.rating-progress-line i{display:block;height:100%;background:var(--text)}.rating-task-progress b{font-size:10px;color:var(--muted)}.rating-number{text-align:right}.rating-number b{font-size:16px}.rating-number.score b{font-size:20px}.rating-action{height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font:inherit;font-size:11px;white-space:nowrap}.rating-action:disabled{color:var(--muted);border-color:var(--border)}.rating-mask{position:fixed;inset:0;z-index:160;background:rgba(0,0,0,.55);display:none;justify-content:flex-end}.rating-mask.show{display:flex}.rating-drawer{width:480px;height:100%;background:var(--card-grad);border-left:1px solid var(--border);display:flex;flex-direction:column}.rating-drawer-head{padding:20px;border-bottom:1px solid var(--border);display:flex}.rating-drawer-head span{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--muted)}.rating-drawer-head h2{font-size:17px;margin-top:5px}.rating-drawer-head button{margin-left:auto;width:30px;height:30px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}.rating-drawer-body{padding:20px;flex:1}.rating-context{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rating-context>div{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px}.rating-context span{display:block;font-size:9.5px;color:var(--muted)}.rating-context b{display:block;font-size:11.5px;margin-top:4px}.rating-slider-block{margin-top:24px;padding:18px;border:1px solid var(--border);border-radius:12px}.rating-slider-head{display:flex}.rating-slider-head b{margin-left:auto;font-size:22px}.rating-slider-block input{width:100%;margin:18px 0 6px}.rating-scale{display:flex;justify-content:space-between;font-size:9px;color:var(--muted)}.rating-preview{margin-top:12px;border-radius:12px;background:var(--text);color:var(--bg);padding:16px;display:grid;grid-template-columns:1fr auto}.rating-preview b{font-size:30px}.rating-preview small{grid-column:1/-1;font-size:9.5px;opacity:.65;margin-top:8px}.rating-drawer-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
 .case-links{margin-top:10px;border-top:1px solid var(--border);padding-top:9px;position:relative;z-index:1}.case-label{display:inline-block;font-size:10px;color:var(--muted);margin-bottom:7px}.case-mini-list{display:flex;flex-direction:column;gap:6px}.case-mini-item{display:flex;align-items:center;gap:10px;padding:8px 9px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2)}.case-mini-main{min-width:0;flex:1}.case-mini-head{display:flex;align-items:center;gap:6px;min-width:0}.case-mini-head b{font-size:10.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.case-status{flex:none;font-size:8.5px;font-weight:600;padding:2px 6px;border-radius:980px;white-space:nowrap}.case-status.excellent{color:var(--up);background:color-mix(in srgb,var(--up) 13%,transparent)}.case-status.qualified{color:var(--text);background:var(--surface)}.case-status.improve{color:var(--down);background:color-mix(in srgb,var(--down) 13%,transparent)}.case-status.pending{color:var(--muted);background:var(--surface)}.case-mini-id{font-size:8.5px;color:var(--muted);font-family:ui-monospace,"SF Mono",Menlo,monospace;margin-top:3px}.case-mini-meta{display:flex;gap:8px;margin-top:3px;font-size:8.5px;color:var(--muted)}.case-score-value{flex:none;text-align:right;font-variant-numeric:tabular-nums}.case-score-value b{display:block;font-size:16px;line-height:1;font-weight:600}.case-score-value small{display:block;font-size:8.5px;margin-top:4px}.case-score-value.up small{color:var(--up)}.case-score-value.down small{color:var(--down)}.case-score-value.flat{color:var(--muted)}
@@ -124,6 +123,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display"
 .engineer-owned-title{display:flex;align-items:center;justify-content:space-between}.engineer-owned-title small{font-size:8.5px;color:var(--muted)}.engineer-owned-case-list{display:flex;flex-direction:column;gap:7px}.engineer-owned-case{display:grid;grid-template-columns:1fr auto;gap:4px 10px;width:100%;border:1px solid var(--border);border-radius:9px;background:var(--surface-2);color:var(--text);padding:10px;text-align:left;font:inherit;cursor:pointer}.engineer-owned-case:hover{border-color:rgba(122,61,255,.42);background:rgba(122,61,255,.05)}.engineer-owned-case-code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:8.5px;color:var(--muted)}.engineer-owned-case>b{grid-column:1;font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.engineer-owned-case-meta{grid-column:1;font-size:8.5px;color:var(--muted)}.engineer-owned-case>strong{grid-column:2;grid-row:1/3;align-self:center;color:#7A3DFF;font-size:17px}.engineer-owned-case>strong.pending{font-size:9px;color:var(--muted)}.engineer-owned-case>small{grid-column:2;grid-row:3;color:#0052D9;font-size:8.5px}.engineer-owned-empty{border:1px dashed var(--border);border-radius:9px;padding:12px;color:var(--muted);font-size:9.5px;text-align:center}
 /* ===== Panels ===== */
 .layout{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;margin-top:18px}
+.overview-split{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch;margin-top:26px}.overview-case-results,.overview-platform{min-width:0}.overview-case-results{display:flex;flex-direction:column}.overview-column-head{height:42px;display:flex;align-items:center;border-bottom:1px solid var(--border);margin-bottom:14px}.overview-column-head h3{font-size:14px;font-weight:600}.overview-result-kpis,.overview-usage-kpis{display:grid;gap:14px}.overview-result-kpis{flex:1;grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr))}.overview-result-kpis .kpi{min-height:0}.overview-result-kpis .spark-wrap{height:100px;margin-top:12px}.overview-result-kpis .spark{height:96px}.overview-usage-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-platform .hours-panel{margin-top:14px;min-height:258px}.overview-freshness{display:flex;align-items:center;gap:6px;height:38px;padding:0 5px 0 12px;border:1px solid var(--border);border-radius:980px;background:var(--surface);color:var(--muted);font-size:10px;white-space:nowrap}.overview-freshness b{color:var(--text);font-weight:500}.overview-freshness.error{border-color:color-mix(in srgb,var(--down) 32%,var(--border))}.overview-refresh{width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--muted);font:inherit;font-size:17px;line-height:1;cursor:pointer}.overview-refresh:hover{background:var(--surface-2);color:var(--text)}.overview-refresh:disabled{cursor:default;opacity:.55}.overview-refresh.spinning{animation:overviewSpin .72s linear infinite}.overview-loading{position:absolute;inset:0;z-index:12;display:none;align-items:center;justify-content:center;border-radius:20px;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.overview-loading.show{display:flex}.overview-loading-inner{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:980px;background:var(--surface);padding:10px 16px;box-shadow:var(--shadow-md),var(--card-hi);color:var(--muted);font-size:11px}.overview-spinner{width:16px;height:16px;border:2px solid var(--border-strong);border-top-color:var(--text);border-radius:50%;animation:overviewSpin .72s linear infinite}@keyframes overviewSpin{to{transform:rotate(360deg)}}
+.overview-split{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch;margin-top:26px}.overview-case-results,.overview-platform{min-width:0}.overview-case-results{display:flex;flex-direction:column}.overview-column-head{height:42px;display:flex;align-items:center;border-bottom:1px solid var(--border);margin-bottom:14px}.overview-column-head h3{font-size:14px;font-weight:600}.overview-result-kpis,.overview-usage-kpis{display:grid;gap:14px}.overview-result-kpis{flex:1;grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr))}.overview-result-kpis .kpi{min-height:0}.overview-result-kpis .spark-wrap{height:100px;margin-top:12px}.overview-result-kpis .spark{height:96px}.overview-usage-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-platform .hours-panel{margin-top:14px;min-height:258px}.overview-freshness{display:flex;align-items:center;gap:6px;height:38px;padding:0 5px 0 12px;border:1px solid var(--border);border-radius:980px;background:var(--surface);color:var(--muted);font-size:10px;white-space:nowrap}.overview-freshness b{color:var(--text);font-weight:500}.overview-freshness.error{border-color:color-mix(in srgb,var(--down) 32%,var(--border))}.overview-refresh{width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--muted);font:inherit;font-size:17px;line-height:1;cursor:pointer}.overview-refresh:hover{background:var(--surface-2);color:var(--text)}.overview-refresh:disabled{cursor:default;opacity:.55}.overview-refresh.spinning{animation:overviewSpin .72s linear infinite}@keyframes overviewSpin{to{transform:rotate(360deg)}}
+.overview-skeleton{position:relative!important;pointer-events:none}.overview-skeleton>*{visibility:hidden}.overview-skeleton:after{content:"";position:absolute;inset:16px;z-index:10;border-radius:10px;background-image:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.07) 45%,rgba(255,255,255,.11) 52%,rgba(255,255,255,.07) 59%,transparent 100%),linear-gradient(var(--surface-2),var(--surface-2)),linear-gradient(var(--surface-2),var(--surface-2)),linear-gradient(var(--surface-2),var(--surface-2)),linear-gradient(var(--surface-2),var(--surface-2));background-repeat:no-repeat;background-size:180% 100%,28% 10px,22% 28px,100% 42%,52% 8px;background-position:-180% 0,0 0,0 28px,0 72px,0 100%;animation:overviewShimmer 1.15s ease-in-out infinite}.overview-result-kpis .overview-skeleton:after{background-size:180% 100%,24% 11px,18% 30px,100% 92px,48% 8px;background-position:-180% 0,0 0,0 29px,0 76px,0 184px}.hours-panel.overview-skeleton:after{inset:16px 18px;background-size:180% 100%,22% 12px,15% 8px,100% 155px,38% 8px;background-position:-180% 0,0 0,100% 2px,0 35px,0 205px}@keyframes overviewShimmer{to{background-position:180% 0,0 0,0 28px,0 72px,0 100%}}
+.overview-data-item{transition:opacity .32s ease,transform .32s ease}.overview-data-item.overview-reveal{animation:overviewReveal .34s cubic-bezier(.22,1,.36,1) both}@keyframes overviewReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .panel{background:var(--card-grad);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm),var(--card-hi)}
 .ph{min-height:50px;padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px}.ph h3{font-size:14px;font-weight:600;letter-spacing:-.015em}.ph small{font-size:10.5px;color:var(--muted)}
 .ph .tag-src{margin-left:auto;font-size:9.5px;font-weight:600;padding:3px 9px;border-radius:980px}
@@ -361,21 +364,25 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;o
 
     <!-- 运营总览 -->
     <section class="page active" id="overview">
-      <div class="head"><div><h1>运营总览</h1><p>EA平台整体的访问、活跃、留存与功能使用概况。</p></div><div class="head-actions"><div class="seg period-seg" data-target="overview"><button data-p="天">天</button><button data-p="周">周</button><button class="on" data-p="月">月</button></div><div class="date-range" data-target="overview"><button class="date-btn" type="button">自定义 ▾</button><div class="date-pop"><div class="dp-row"><span>从</span><input type="date" class="d-from"></div><div class="dp-row"><span>至</span><input type="date" class="d-to"></div><button class="btn primary d-apply" type="button">应用</button></div></div></div></div>
+      <div class="head"><div><h1>运营总览</h1><p>EA平台整体的访问、活跃与交付质量概况。</p></div><div class="head-actions"><div class="overview-freshness" id="overviewFreshness"><span>数据更新于</span><b id="overviewUpdatedAt">--</b><button class="overview-refresh" id="overviewRefresh" type="button" title="刷新数据" aria-label="刷新数据" onclick="loadLive()">↻</button></div><div class="seg period-seg" data-target="overview"><button class="on" data-p="天">天</button><button data-p="周">周</button><button data-p="月">月</button></div><div class="date-range" data-target="overview"><button class="date-btn" type="button">自定义 ▾</button><div class="date-pop"><div class="dp-row"><span>从</span><input type="date" class="d-from"></div><div class="dp-row"><span>至</span><input type="date" class="d-to"></div><button class="btn primary d-apply" type="button">应用</button></div></div></div></div>
 
-      <div class="section-label"><span class="b" style="background:var(--muted)"></span>交付效率与质量</div>
-      <div class="kpis trio" id="ovQualityKpis"></div>
+      <div class="overview-split">
+        <section class="overview-case-results">
+          <div class="overview-column-head"><h3>核心指标</h3></div>
+          <div class="overview-result-kpis" id="ovQualityKpis"></div>
+        </section>
+        <section class="overview-platform">
+          <div class="overview-column-head"><h3>平台使用</h3></div>
+          <div class="overview-usage-kpis" id="ovAccessKpis"></div>
+          <div class="panel hours-panel"><div class="ph"><h3>访问时段分布</h3><small id="ovHoursLabel">近30天 · 按小时</small></div><div class="pb"><div class="hours" id="ovHours"></div><div class="hours-x"><span>0时</span><span>6时</span><span>12时</span><span>18时</span><span>23时</span></div></div></div>
+        </section>
+      </div>
 
-      <div class="section-label" style="margin-top:22px"><span class="b" style="background:var(--muted)"></span>访问与活跃</div>
-      <div class="kpis" id="ovAccessKpis"></div>
+      <div class="section-label" style="display:none;margin-top:22px"><span class="b" style="background:var(--muted)"></span>参与与转化</div>
+      <div class="kpis" id="ovEngageKpis" style="display:none"></div>
 
-      <div class="section-label" style="margin-top:22px"><span class="b" style="background:var(--muted)"></span>参与与转化</div>
-      <div class="kpis" id="ovEngageKpis"></div>
-
-      <div class="section-label" style="margin-top:24px"><span class="b" style="background:var(--muted)"></span>使用洞察</div>
-      <div class="layout">
-        <div class="panel hours-panel"><div class="ph"><h3>访问时段分布</h3><small id="ovHoursLabel">近30天 · 按小时</small></div><div class="pb"><div class="hours" id="ovHours"></div><div class="hours-x"><span>0时</span><span>6时</span><span>12时</span><span>18时</span><span>23时</span></div></div></div>
-        <div class="panel"><div class="ph"><h3>功能模块使用</h3><small id="ovFeatLabel">近30天</small></div><div class="pb"><div class="distbar" id="ovFeature"></div></div></div>
+      <div style="display:none">
+        <div class="panel" style="display:none"><div class="ph"><h3>功能模块使用</h3><small id="ovFeatLabel">近30天</small></div><div class="pb"><div class="distbar" id="ovFeature"></div></div></div>
       </div>
     </section>
 
@@ -407,7 +414,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;o
       <div class="mini-cards" id="teamCards"></div>
 
       <div class="section-label" style="margin-top:22px"><span class="b" style="background:var(--muted)"></span>用户登录与使用明细<small>具体到人：谁用了、谁没用</small></div>
-      <div class="kpis" id="userKpis" style="grid-template-columns:repeat(5,1fr)"></div>
+      <div class="kpis" id="userKpis" style="grid-template-columns:repeat(7,1fr)"></div>
       <div class="filters" style="margin-top:12px">
         <input class="filter search-in" id="userSearch" placeholder="搜索姓名 / 部门">
         <span class="filter-label">团队</span><select class="filter" id="fDept"></select>
@@ -514,29 +521,29 @@ function workStats(u){
  return {u,done,doing,pending,total:done+doing+pending,avgHours};
 }
 /* ===== 时间维度（天/周/月/自定义）+ 同比趋势 ===== */
-const state={overview:{period:'月',from:null,to:null},caseScore:{period:'月',from:null,to:null},behavior:{period:'月',from:null,to:null},usage:{period:'月',from:null,to:null}};
+const state={overview:{period:'天',from:null,to:null},caseScore:{period:'月',from:null,to:null},behavior:{period:'月',from:null,to:null},usage:{period:'月',from:null,to:null}};
 let userPage=1; const USER_PS=8;
 const periodFactor={天:0.05,周:0.25,月:1};
 const periodLabel={天:'当日',周:'本周',月:'近30天'};
 const daysBetween=(a,b)=>Math.max(1,Math.round((new Date(b)-new Date(a))/864e5)+1);
-function ovDataFor(){const st=state.overview;if(st.period!=='custom')return ovData[st.period];const D=daysBetween(st.from,st.to);const day=ovData['天'],mon=ovData['月'];const S=new Set(['活跃用户','新增用户','访问次数']);const mk=(key)=>mon[key].map((r,i)=>S.has(r[0])?[r[0],Math.round(day[key][i][1]*D),r[2],r[3],r[4]]:r);return {quality:mk('quality'),access:mk('access'),engage:mk('engage')};}
+function ovDataFor(){const st=state.overview;if(st.period!=='custom')return ovData[st.period];const D=daysBetween(st.from,st.to);const day=ovData['天'],mon=ovData['月'];const S=new Set(['访问次数','新用户','新增Case']);const mk=(key)=>mon[key].map((r,i)=>S.has(r[0])?[r[0],Math.round(day[key][i][1]*D),r[2],r[3],r[4]]:r);return {quality:mk('quality'),access:mk('access'),engage:mk('engage')};}
 function usageFactor(){const st=state.usage;return st.period==='custom'?daysBetween(st.from,st.to)/30:periodFactor[st.period];}
 function usageLabel(){const st=state.usage;return st.period==='custom'?`${st.from.slice(5)}–${st.to.slice(5)}`:periodLabel[st.period];}
 // 每张卡：[名称, 数值, 单位, 口径, 同比趋势%]（正=上升绿，负=下降红）
 const ovData={
  天:{
-  quality:[['平均结案周期',11.8,' 天','从建 Case 到结案的平均用时',-4],['AI 平均得分',87,' 分','本期已完成 AI 评分均值',6],['Skills 任务执行率',74,'%','已执行 Skills 任务/应执行任务',8]],
-  access:[['活跃用户',38,'','去重登录用户',9],['新增用户',3,'','新注册用户',6],['访问次数',210,'','页面访问 PV',14],['次日留存',61,'%','隔日回访率',-2],['平均停留',7.9,' 分','会话时长均值',3],['覆盖团队',6,'','有活跃团队数',0]],
+  quality:[['平均结案时间',11.8,' 天','从建 Case 到结案的平均用时',-4],['Case平均分',87,' 分','本期已完成 AI 评分均值',6],['人机比',74,'%','由AI完成的任务/总任务',8]],
+  access:[['活跃用户',38,'','去重登录用户',9],['访问次数',210,'','页面访问 PV',14],['新用户',3,'','新注册用户',6],['Case总数',128,'','平台累计 Case 数',8],['新增Case',2,'','本期新建 Case 数',12],['平均使用时长',7.9,' 分','单次会话平均使用时长',3]],
   engage:[['注册用户',14,'','账号总数',0],['活跃率',43,'%','活跃/注册',7],['AI 采纳率',39,'%','采纳/调用=57/146',4],['引导完成率',78,'%','完成/启动=93/119',3],['版本已读率',72,'%','已读/推送=112/156',5],['搜索无结果率',11,'%','无结果/使用=41/372',-2]],
  },
  周:{
-  quality:[['平均结案周期',12.1,' 天','从建 Case 到结案的平均用时',-5],['AI 平均得分',86,' 分','本期已完成 AI 评分均值',6],['Skills 任务执行率',72,'%','已执行 Skills 任务/应执行任务',7]],
-  access:[['活跃用户',96,'','去重登录用户',12],['新增用户',11,'','新注册用户',5],['访问次数',940,'','页面访问 PV',8],['次日留存',63,'%','隔日回访率',1],['平均停留',8.4,' 分','会话时长均值',-1],['覆盖团队',7,'','有活跃团队数',1]],
+  quality:[['平均结案时间',12.1,' 天','从建 Case 到结案的平均用时',-5],['Case平均分',86,' 分','本期已完成 AI 评分均值',6],['人机比',72,'%','由AI完成的任务/总任务',7]],
+  access:[['活跃用户',96,'','去重登录用户',12],['访问次数',940,'','页面访问 PV',8],['新用户',11,'','新注册用户',5],['Case总数',128,'','平台累计 Case 数',8],['新增Case',7,'','本期新建 Case 数',10],['平均使用时长',8.4,' 分','单次会话平均使用时长',-1]],
   engage:[['注册用户',14,'','账号总数',0],['活跃率',57,'%','活跃/注册',9],['AI 采纳率',41,'%','采纳/调用=61/148',6],['引导完成率',80,'%','完成/启动=97/121',2],['版本已读率',81,'%','已读/推送=126/156',8],['搜索无结果率',9,'%','无结果/使用=38/430',-3]],
  },
  月:{
-  quality:[['平均结案周期',12.6,' 天','从建 Case 到结案的平均用时',-8],['AI 平均得分',86,' 分','本期已完成 AI 评分均值',6],['Skills 任务执行率',69,'%','已执行 Skills 任务/应执行任务',9]],
-  access:[['活跃用户',142,'','去重登录用户',6],['新增用户',24,'','新注册用户',-3],['访问次数',1860,'','页面访问 PV',5],['次日留存',64,'%','隔日回访率',2],['平均停留',8.7,' 分','会话时长均值',4],['覆盖团队',8,'','有活跃团队数',0]],
+  quality:[['平均结案时间',12.6,' 天','从建 Case 到结案的平均用时',-8],['Case平均分',86,' 分','本期已完成 AI 评分均值',6],['人机比',69,'%','由AI完成的任务/总任务',9]],
+  access:[['活跃用户',142,'','去重登录用户',6],['访问次数',1860,'','页面访问 PV',5],['新用户',24,'','新注册用户',-3],['Case总数',128,'','平台累计 Case 数',8],['新增Case',18,'','本期新建 Case 数',9],['平均使用时长',8.7,' 分','单次会话平均使用时长',4]],
   engage:[['注册用户',14,'','账号总数',1],['活跃率',50,'%','活跃/注册',6],['AI 采纳率',41,'%','采纳/调用=61/148',3],['引导完成率',81,'%','完成/启动=97/120',4],['版本已读率',85,'%','已读/推送=132/156',6],['搜索无结果率',9,'%','无结果/使用=38/430',-1]],
  },
 };
@@ -574,7 +581,7 @@ const trendHTML=(d)=>{if(!d)return '<span class="trend flat">— 0%</span>';cons
 const seedOf=s=>[...s].reduce((a,c)=>a+c.charCodeAt(0),0);
 function sparkSeries(value,trend,seed,n=12){const start=trend?value/(1+trend/100):value*.96;const amp=(Math.abs(value-start)||Math.max(1,Math.abs(value)*.05))*.6;const rnd=i=>{const x=Math.sin((i+1)*12.9898+seed*78.233)*43758.5453;return x-Math.floor(x)};return Array.from({length:n},(_,i)=>{if(i===n-1)return value;const p=i/(n-1),v=start+(value-start)*p+(i?(rnd(i)-.5)*amp:0);return Math.max(0,Number.isInteger(value)?Math.round(v):+v.toFixed(1))})}
 function sparkDates(st,n=12){const t=+new Date(TODAY);if(st.period==='月')return Array.from({length:n},(_,i)=>{const d=new Date(t);d.setMonth(d.getMonth()-(n-1-i));return `${d.getMonth()+1}月`});const step=st.period==='周'?7:1;return Array.from({length:n},(_,i)=>{const d=new Date(t-(n-1-i)*step*864e5);return `${d.getMonth()+1}-${d.getDate()}`})}
-function sparkHTML(k,st){const s=sparkSeries(k[1],k[4],seedOf(k[0])),labels=sparkDates(st),min=Math.min(...s),max=Math.max(...s),span=max-min||1;const pts=s.map((v,i)=>`${i/(s.length-1)*100},${30-(v-min)/span*24}`).join(' '),area=`0,34 ${pts} 100,34`,cls=k[4]>0?'up':k[4]<0?'down':'flat',endY=30-(s.at(-1)-min)/span*24;return `<div class="spark-wrap ${cls}" data-series='${JSON.stringify(s)}' data-labels='${JSON.stringify(labels)}' data-unit="${k[2]}"><svg class="spark" viewBox="0 0 100 34" preserveAspectRatio="none"><polygon class="spark-area" points="${area}"></polygon><polyline class="spark-line" points="${pts}"></polyline></svg><i class="spark-dot-el" style="left:100%;top:${endY/34*100}%"></i><i class="spark-hot-el" style="display:none"></i><div class="spark-tip"><span></span><b></b></div></div>`}
+function sparkHTML(k,st){const s=sparkSeries(k[1],k[4],seedOf(k[0])),labels=sparkDates(st),min=Math.min(...s),max=Math.max(...s),span=max-min||1;const pts=s.map((v,i)=>`${i/(s.length-1)*100},${30-(v-min)/span*24}`).join(' '),area=`0,34 ${pts} 100,34`,cls=k[4]>0?'up':k[4]<0?'down':'flat',endY=30-(s.at(-1)-min)/span*24,gradientId=`spark-${seedOf(k[0])}-${Math.abs(Math.round(k[1]*10))}`;return `<div class="spark-wrap ${cls}" data-series='${JSON.stringify(s)}' data-labels='${JSON.stringify(labels)}' data-unit="${k[2]}"><svg class="spark" viewBox="0 0 100 34" preserveAspectRatio="none"><defs><linearGradient id="${gradientId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--g-soft)" stop-opacity=".20"></stop><stop offset="58%" stop-color="var(--g-mid)" stop-opacity=".07"></stop><stop offset="100%" stop-color="var(--g-mid)" stop-opacity="0"></stop></linearGradient></defs><polygon class="spark-area" fill="url(#${gradientId})" points="${area}"></polygon><polyline class="spark-line" points="${pts}"></polyline></svg><i class="spark-dot-el" style="left:100%;top:${endY/34*100}%"></i><i class="spark-hot-el" style="display:none"></i><div class="spark-tip"><span></span><b></b></div></div>`}
 function kpiHTML(arr,st){return arr.map(k=>`<div class="kpi tele"><div class="label">${k[0]}</div><div class="value tn">${k[1]}<small>${k[2]}</small>${trendHTML(k[4])}</div>${sparkHTML(k,st)}<div class="calc"><code>${k[3]}</code> · 同比</div></div>`).join('')}
 /* ================= umami 数据适配层 =================
  * 本平台 = umami 采集数据之上的二次开发前端。
@@ -592,15 +599,15 @@ async function umOverview(st){
    um(`/api/websites/${UMAMI.websiteId}/stats`,{startAt,endAt,compare:'prev'}),
    um(`/api/websites/${UMAMI.websiteId}/metrics`,{startAt,endAt,type:'event'}),
  ]);
- const tr=(c,p)=>p?Math.round((c-p)/p*100):0, cmp=stats.comparison||{};
+ const tr=(c,p)=>p?Math.round((c-p)/p*100):0, cmp=stats.comparison||{},ev=(n)=>{const e=events.find(x=>x.x===n);return e?e.y:0;},current=Object.fromEntries(ovData['月'].access.map(item=>[item[0],item]));
  const access=[
    ['活跃用户',stats.visitors,'','去重访客',tr(stats.visitors,cmp.visitors)],
    ['访问次数',stats.pageviews,'','页面访问 PV',tr(stats.pageviews,cmp.pageviews)],
-   ['访问会话',stats.visits,'','会话数',tr(stats.visits,cmp.visits)],
-   ['跳出率',pct(stats.bounces,stats.visits),'%','单页访问占比',tr(pct(stats.bounces,stats.visits),pct(cmp.bounces,cmp.visits))],
-   ['平均停留',+(stats.totaltime/Math.max(1,stats.visits)/60).toFixed(1),' 分','总时长/会话',0],
+   current['新用户'],
+   current['Case总数'],
+   ['新增Case',ev('funnel:完成建Case'),'','本期新建 Case 数',0],
+   ['平均使用时长',+(stats.totaltime/Math.max(1,stats.visits)/60).toFixed(1),' 分','单次会话平均使用时长',0],
  ];
- const ev=(n)=>{const e=events.find(x=>x.x===n);return e?e.y:0;};
  const feats=events.filter(e=>e.x.startsWith('模块:')).map(e=>[e.x.replace('模块:',''),e.y]).sort((a,b)=>b[1]-a[1]);
  const F=['funnel:进入新建Case','funnel:完成建Case','funnel:展开思维导图','funnel:申请结案'];
  const b=ev(F[0])||1;
@@ -608,22 +615,39 @@ async function umOverview(st){
  return {access,feats,funnel};
 }
 // 接入开关：useMock=false 时用 umami 真实数据覆盖演示数据并重渲染
+let overviewLoadToken=0;
+const overviewWait=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
+function overviewDataItems(){return[...document.querySelectorAll('#ovQualityKpis .kpi,#ovAccessKpis .kpi,.overview-platform .hours-panel')]}
+function setOverviewLoading(active){const button=document.getElementById('overviewRefresh');if(button){button.disabled=active;button.classList.toggle('spinning',active)}if(active)overviewDataItems().forEach(item=>{item.classList.add('overview-data-item','overview-skeleton');item.classList.remove('overview-reveal')})}
+function revealOverviewData(token){const items=overviewDataItems();items.forEach(item=>item.classList.add('overview-data-item','overview-skeleton'));return new Promise(resolve=>{if(!items.length){resolve(true);return}let completed=0;items.forEach((item,index)=>setTimeout(()=>{if(token!==overviewLoadToken){resolve(false);return}item.classList.remove('overview-skeleton');item.classList.add('overview-reveal');completed++;if(completed===items.length){const button=document.getElementById('overviewRefresh');if(button){button.disabled=false;button.classList.remove('spinning')}resolve(true)}},90*(index+1)))})}
+function setOverviewUpdatedAt(date=new Date(),error=false){const wrap=document.getElementById('overviewFreshness'),value=document.getElementById('overviewUpdatedAt'),pad=n=>String(n).padStart(2,'0');wrap?.classList.toggle('error',error);if(value)value.textContent=error?'更新失败 · 保留上次数据':`${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`}
 async function loadLive(){
- if(UMAMI.useMock)return;
+ const token=++overviewLoadToken;setOverviewLoading(true);
  try{
+  if(UMAMI.useMock){await overviewWait(180);if(token!==overviewLoadToken)return;renderOverview();animateCounts(document.getElementById('overview'));if(await revealOverviewData(token))setOverviewUpdatedAt();return;}
   const o=await umOverview(state.overview);
+  if(token!==overviewLoadToken)return;
   ovData['月'].access=o.access;
   if(o.feats.length) tele.features=o.feats;
   if(o.funnel[0][1]) tele.funnel=o.funnel;
   renderOverview();renderBehavior();animateCounts(document.getElementById('overview'));
+  if(await revealOverviewData(token))setOverviewUpdatedAt();
   // 参与/团队/用户明细：见 EA埋点方案-umami.md（metrics type=distinctId / events series / reports）
- }catch(e){console.warn('[umami] 拉取失败，回退演示数据：',e);}
+ }catch(e){console.warn('[umami] 拉取失败，回退演示数据：',e);if(token===overviewLoadToken){overviewDataItems().forEach(item=>item.classList.remove('overview-skeleton'));const button=document.getElementById('overviewRefresh');if(button){button.disabled=false;button.classList.remove('spinning')}setOverviewUpdatedAt(new Date(),true);}}
 }
 /* ===== 运营总览（访问/参与汇总 + 功能使用） ===== */
+function overviewSplitMetrics(data,qualityOverride){
+ const quality=qualityOverride||data.quality;
+ return{
+  result:[quality[0],quality[1],quality[2]].filter(Boolean),
+  usage:data.access,
+ };
+}
 function renderOverview(){
  const d=ovDataFor();
- document.getElementById('ovQualityKpis').innerHTML=kpiHTML(d.quality,state.overview);
- document.getElementById('ovAccessKpis').innerHTML=kpiHTML(d.access,state.overview);
+ const split=overviewSplitMetrics(d);
+ document.getElementById('ovQualityKpis').innerHTML=kpiHTML(split.result,state.overview);
+ document.getElementById('ovAccessKpis').innerHTML=kpiHTML(split.usage,state.overview);
  document.getElementById('ovEngageKpis').innerHTML=kpiHTML(d.engage,state.overview);
  const st=state.overview;const ff=st.period==='custom'?daysBetween(st.from,st.to)/30:periodFactor[st.period];
  document.getElementById('ovFeatLabel').textContent=st.period==='custom'?`${st.from.slice(5)}–${st.to.slice(5)}`:periodLabel[st.period];
@@ -750,7 +774,7 @@ function staticCaseAIScoreSummary(records){
  const completed=records.filter(record=>record.aiState==='已完成'&&record.aiScore!=null),scores=completed.map(record=>record.aiScore);
  return{average:scores.length?Math.round(scores.reduce((sum,score)=>sum+score,0)/scores.length):0,highCount:scores.filter(score=>score>=90).length,lowCount:scores.filter(score=>score<80).length,spread:scores.length?Math.max(...scores)-Math.min(...scores):0};
 }
-function staticCaseAIAverageKpi(records){return['AI 平均得分',staticCaseAIScoreSummary(records).average,' 分','本期已完成 AI 评分均值',6]}
+function staticCaseAIAverageKpi(records){return['Case平均分',staticCaseAIScoreSummary(records).average,' 分','本期已完成 AI 评分均值',6]}
 periodCaseRatings=function(){return staticCaseRatingsForPeriod(state.caseScore,Boolean(state.caseScore.all))};
 renderCaseScore=function(){
  const rows=periodCaseRatings(),summary=staticCaseAIScoreSummary(rows);
@@ -760,9 +784,11 @@ renderCaseScore=function(){
 const renderOverviewAlignedBase=renderOverview;
 renderOverview=function(){
  renderOverviewAlignedBase();
- const quality=ovDataFor().quality.slice();
+ const data=ovDataFor(),quality=data.quality.slice();
  quality[1]=staticCaseAIAverageKpi(staticCaseRatingsForPeriod(state.overview));
- document.getElementById('ovQualityKpis').innerHTML=kpiHTML(quality,state.overview);
+ const split=overviewSplitMetrics(data,quality);
+ document.getElementById('ovQualityKpis').innerHTML=kpiHTML(split.result,state.overview);
+ document.getElementById('ovAccessKpis').innerHTML=kpiHTML(split.usage,state.overview);
 };
 /* ===== 核心行为（日期联动 + 指标 + 漏斗 + 各步转化，不含 Issue/Checklist） ===== */
 function behFactor(){const st=state.behavior;return st.period==='custom'?daysBetween(st.from,st.to)/30:periodFactor[st.period];}
@@ -812,12 +838,15 @@ function renderUsers(){
  const active7=us.filter(u=>userStatus(u)==='活跃').length;
  const silent=us.filter(u=>userStatus(u)==='沉默').length;
  const never=us.filter(u=>userStatus(u)==='从未登录').length;
+ const health={天:{retentionD1:61,teams:6},周:{retentionD1:63,teams:7},月:{retentionD1:64,teams:8}}[state.usage.period==='custom'?'月':state.usage.period];
  document.getElementById('userKpis').innerHTML=[
   ['注册用户',total,'账号总数'],
   ['已激活',activated+' <small>'+pct(activated,total)+'%</small>','曾登录过（lastLogin≠空）'],
   ['近7日活跃',active7+' <small>'+pct(active7,total)+'%</small>','最近登录≤7天'],
   ['沉默用户',silent,'登录过但>7天未登录'],
   ['从未登录',never,'lastLogin 为空'],
+  ['次日留存',health.retentionD1+'<small>%</small>','隔日回访用户/新增用户'],
+  ['覆盖团队',health.teams,'周期内有活跃用户的团队数'],
  ].map(k=>`<div class="kpi tele"><div class="label">${k[0]}</div><div class="value tn">${k[1]}</div><div class="calc">口径·<code>${k[2]}</code></div></div>`).join('');
  // dept filter options
  const sel=document.getElementById('fDept');if(sel.options.length===0){const ds=[...new Set(us.map(u=>u.dept))];sel.innerHTML='<option value="all">全部</option>'+ds.map(d=>`<option>${d}</option>`).join('');}
@@ -1005,7 +1034,7 @@ document.querySelectorAll('.topnav button[data-page]').forEach(b=>b.onclick=()=>
 document.getElementById('fDept').addEventListener('change',()=>{userPage=1;renderUserRows();renderTeams()});
 document.getElementById('userPager').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;if(b.dataset.pg==='prev')userPage--;else userPage++;renderUserRows();document.querySelector('#usage .table-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});});
 // 重新渲染某页
-function rerender(target){if(target==='overview'){renderOverview();animateCounts(document.getElementById('overview'));}else if(target==='caseScore'){renderCaseScore();animateCounts(document.getElementById('case-score'));}else if(target==='behavior'){renderBehavior();animateCounts(document.getElementById('behavior'));}else{renderTeams();renderUserRows();animateCounts(document.getElementById('usage'));}}
+function rerender(target){if(target==='overview'){loadLive();}else if(target==='caseScore'){renderCaseScore();animateCounts(document.getElementById('case-score'));}else if(target==='behavior'){renderBehavior();animateCounts(document.getElementById('behavior'));}else{renderTeams();renderUserRows();animateCounts(document.getElementById('usage'));}}
 // 时间维度切换（天/周/月/全部）；Case评分的全部选项统一放在右上角。
 state.caseScore.all=false;
 const caseScorePeriodSeg=document.querySelector('.period-seg[data-target="caseScore"]');
