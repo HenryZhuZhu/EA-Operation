@@ -595,24 +595,24 @@ let userPage=1; const USER_PS=8;
 const periodFactor={天:0.05,周:0.25,月:1};
 const periodLabel={天:'当日',周:'本周',月:'近30天'};
 const daysBetween=(a,b)=>Math.max(1,Math.round((new Date(b)-new Date(a))/864e5)+1);
-function ovDataFor(){const st=state.overview;if(st.period!=='custom')return ovData[st.period];const D=daysBetween(st.from,st.to);const day=ovData['天'],mon=ovData['月'];const S=new Set(['访问次数','新用户','新增Case']);const mk=(key)=>mon[key].map((r,i)=>S.has(r[0])?[r[0],Math.round(day[key][i][1]*D),r[2],r[3],r[4]]:r);return {quality:mk('quality'),access:mk('access'),engage:mk('engage')};}
+function ovDataFor(){const st=state.overview;if(st.period!=='custom')return ovData[st.period];const D=daysBetween(st.from,st.to);const day=ovData['天'],mon=ovData['月'];const S=new Set(['访问次数','编辑内容用户','新增Case']);const mk=(key)=>mon[key].map((r,i)=>S.has(r[0])?[r[0],Math.round(day[key][i][1]*D),r[2],r[3],r[4]]:r);return {quality:mk('quality'),access:mk('access'),engage:mk('engage')};}
 function usageFactor(){const st=state.usage;return st.period==='custom'?daysBetween(st.from,st.to)/30:periodFactor[st.period];}
 function usageLabel(){const st=state.usage;return st.period==='custom'?`${st.from.slice(5)}–${st.to.slice(5)}`:periodLabel[st.period];}
 // 每张卡：[名称, 数值, 单位, 口径, 同比趋势%]（正=上升绿，负=下降红）
 const ovData={
  天:{
   quality:[['平均结案时间',11.8,' 天','从建 Case 到结案的平均用时',-4],['Case平均分',87,' 分','本期已完成 AI 评分均值',6],['人机比',74,'%','由AI完成的任务/总任务',8]],
-  access:[['活跃用户',38,'','去重登录用户',9],['访问次数',210,'','页面访问 PV',14],['新用户',3,'','新注册用户',6],['Case总数',128,'','平台累计 Case 数',8],['新增Case',2,'','本期新建 Case 数',12],['平均使用时长',7.9,' 分','单次会话平均使用时长',3]],
+  access:[['活跃用户',38,'','去重登录用户',9],['访问次数',210,'','页面访问 PV',14],['编辑内容用户',3,'','本期发生内容编辑的去重用户',6],['Case总数',128,'','平台累计 Case 数',8],['新增Case',2,'','本期新建 Case 数',12],['平均使用时长',7.9,' 分','单次会话平均使用时长',3]],
   engage:[['注册用户',14,'','账号总数',0],['活跃率',43,'%','活跃/注册',7],['AI 采纳率',39,'%','采纳/调用=57/146',4],['引导完成率',78,'%','完成/启动=93/119',3],['版本已读率',72,'%','已读/推送=112/156',5],['搜索无结果率',11,'%','无结果/使用=41/372',-2]],
  },
  周:{
   quality:[['平均结案时间',12.1,' 天','从建 Case 到结案的平均用时',-5],['Case平均分',86,' 分','本期已完成 AI 评分均值',6],['人机比',72,'%','由AI完成的任务/总任务',7]],
-  access:[['活跃用户',96,'','去重登录用户',12],['访问次数',940,'','页面访问 PV',8],['新用户',11,'','新注册用户',5],['Case总数',128,'','平台累计 Case 数',8],['新增Case',7,'','本期新建 Case 数',10],['平均使用时长',8.4,' 分','单次会话平均使用时长',-1]],
+  access:[['活跃用户',96,'','去重登录用户',12],['访问次数',940,'','页面访问 PV',8],['编辑内容用户',11,'','本期发生内容编辑的去重用户',5],['Case总数',128,'','平台累计 Case 数',8],['新增Case',7,'','本期新建 Case 数',10],['平均使用时长',8.4,' 分','单次会话平均使用时长',-1]],
   engage:[['注册用户',14,'','账号总数',0],['活跃率',57,'%','活跃/注册',9],['AI 采纳率',41,'%','采纳/调用=61/148',6],['引导完成率',80,'%','完成/启动=97/121',2],['版本已读率',81,'%','已读/推送=126/156',8],['搜索无结果率',9,'%','无结果/使用=38/430',-3]],
  },
  月:{
   quality:[['平均结案时间',12.6,' 天','从建 Case 到结案的平均用时',-8],['Case平均分',86,' 分','本期已完成 AI 评分均值',6],['人机比',69,'%','由AI完成的任务/总任务',9]],
-  access:[['活跃用户',142,'','去重登录用户',6],['访问次数',1860,'','页面访问 PV',5],['新用户',24,'','新注册用户',-3],['Case总数',128,'','平台累计 Case 数',8],['新增Case',18,'','本期新建 Case 数',9],['平均使用时长',8.7,' 分','单次会话平均使用时长',4]],
+  access:[['活跃用户',142,'','去重登录用户',6],['访问次数',1860,'','页面访问 PV',5],['编辑内容用户',24,'','本期发生内容编辑的去重用户',-3],['Case总数',128,'','平台累计 Case 数',8],['新增Case',18,'','本期新建 Case 数',9],['平均使用时长',8.7,' 分','单次会话平均使用时长',4]],
   engage:[['注册用户',14,'','账号总数',1],['活跃率',50,'%','活跃/注册',6],['AI 采纳率',41,'%','采纳/调用=61/148',3],['引导完成率',81,'%','完成/启动=97/120',4],['版本已读率',85,'%','已读/推送=132/156',6],['搜索无结果率',9,'%','无结果/使用=38/430',-1]],
  },
 };
@@ -672,7 +672,7 @@ async function umOverview(st){
  const access=[
    ['活跃用户',stats.visitors,'','去重访客',tr(stats.visitors,cmp.visitors)],
    ['访问次数',stats.pageviews,'','页面访问 PV',tr(stats.pageviews,cmp.pageviews)],
-   current['新用户'],
+  current['编辑内容用户'],
    current['Case总数'],
    ['新增Case',ev('funnel:完成建Case'),'','本期新建 Case 数',0],
    ['平均使用时长',+(stats.totaltime/Math.max(1,stats.visits)/60).toFixed(1),' 分','单次会话平均使用时长',0],
